@@ -1,16 +1,7 @@
-import {
-  ActivityIndicator,
-  Button,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-
-import SignInComponent from '../../components/signin/SignInComponents';
-import FaceIdComponent from '../../components/faceid/FaceIdComponent';
 import {StackActions, useNavigation} from '@react-navigation/native';
 import {useEffect} from 'react';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import LoaderComponent from '../../components/LoaderComponent/LoaderComponent';
 
 const InitialScreen = () => {
   const navigation = useNavigation();
@@ -37,7 +28,7 @@ const InitialScreen = () => {
     initAppFlow();
   }, [navigation]);
 
-  return <ActivityIndicator />;
+  return <LoaderComponent />;
 };
 
 export default InitialScreen;

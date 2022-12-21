@@ -1,19 +1,21 @@
 import {render, fireEvent, act} from '@testing-library/react-native';
 import PrivateScreen from '../PrivateScreen';
+import {Provider} from 'react-redux';
+import store from '../../../redux/store';
 
-jest.mock('react-redux', () => {
-  const ActualReactRedux = jest.requireActual('react-redux');
-  return {
-    ...ActualReactRedux,
-    useSelector: jest.fn().mockImplementation(() => {
-      return {
-        user: {},
-        loading: false,
-        error: '',
-      };
-    }),
-  };
-});
+// jest.mock('react-redux', () => {
+//   const ActualReactRedux = jest.requireActual('react-redux');
+//   return {
+//     ...ActualReactRedux,
+//     useSelector: jest.fn().mockImplementation(() => {
+//       return {
+//         user: {},
+//         loading: false,
+//         error: '',
+//       };
+//     }),
+//   };
+// });
 
 describe('use-debounce test', () => {
   jest.spyOn(global, 'setTimeout');
@@ -24,7 +26,11 @@ describe('use-debounce test', () => {
     jest.useRealTimers();
   });
   it('should handle use-debounce', () => {
-    const utils = render(<PrivateScreen />);
+    const utils = render(
+      <Provider store={store}>
+        <PrivateScreen />
+      </Provider>,
+    );
 
     const input = utils.getByLabelText('user-input');
     expect(setTimeout).toBeCalledTimes(0);
