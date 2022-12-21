@@ -1,3 +1,4 @@
+import {StackActions} from '@react-navigation/native';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Text,
@@ -29,9 +30,14 @@ const SignInComponent = ({navigation}) => {
       return;
     }
     if (user.user.token) {
-      navigation.navigate('PrivateStack', {
-        screen: 'PrivateScreen',
-      });
+      // navigation.navigate('PrivateStack', {
+      //   screen: 'PrivateScreen',
+      // });
+      navigation.dispatch(
+        StackActions.replace('PrivateStack', {
+          screen: 'PrivateScreen',
+        }),
+      );
     }
   }, [dispatch, user]);
 

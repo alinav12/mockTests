@@ -1,3 +1,4 @@
+import {StackActions, useNavigation} from '@react-navigation/native';
 import {useCallback} from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import ReactNativeBiometrics from 'react-native-biometrics';
@@ -5,6 +6,7 @@ import ReactNativeBiometrics from 'react-native-biometrics';
 import styles from './styles';
 
 const FaceIdComponent = () => {
+  const navigation = useNavigation();
   const handleFaceId = useCallback(async () => {
     const rnBiometrics = new ReactNativeBiometrics();
     rnBiometrics
@@ -13,6 +15,14 @@ const FaceIdComponent = () => {
         const {success} = resultObject;
         if (success) {
           console.log('successful biometrics provided');
+          // navigation.navigate('PrivateStack', {
+          //   screen: 'PrivateScreen',
+          // });
+          navigation.dispatch(
+            StackActions.replace('PrivateStack', {
+              screen: 'PrivateScreen',
+            }),
+          );
           // setIsUserVerified(true);
         } else {
           console.log('user cancelled biometric prompt');
